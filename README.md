@@ -1,33 +1,122 @@
-# Semiconductor Supply-Chain: Data Collector & Network Visualizations
+# Semiconductor Supply-Chain Network: API Collector & Graph Gallery
 
-API-driven pipeline that assembles a **buyer–supplier network** for publicly listed semiconductor firms , then produces **model-ready data** for **exploratory visuals** and regression (ERGM, QAP) in network analysis.
+**End-to-end, API-driven pipeline** that builds a buyer–supplier network for semiconductor firms and produces publication-quality visuals for downstream social network analysis (ERGM, QAP, etc.).
 
-> Goal: expose how **network structure** sustains outsourcing relationships—even after the 2020–2023 chip-shortage shock.
+- **What this shows:** How **network structure** helps sustain outsourcing ties even after shocks (e.g., the 2020–2023 chip shortage).
+- **Who this helps:** Researchers, data engineers, and hiring teams evaluating full-lifecycle data work (collection → cleaning → modeling → visualization).
 
 ---
 
-## Repository Structure
+## Highlights
+
+- **Collector + Graphs:** Python pipeline (Refinitiv) to fetch firm attributes and supplier–buyer edges, reconcile names/IDs, export CSVs, and render graphs.
+- **Scalable new collector:** Parallelized lookups and cleaner expand-search logic; designed to scale to **thousands of firms** (subject to API limits and your data access).
+- **Example outputs:** Curated figures in `Graphs/` demonstrate structural patterns by **market cap**, **R&D**, **firm role**, and **HQ geography**.
+
+---
+
+## Repository Layout
+.
+├── API Collector finalized.py
+├── API collector fnialized.ipynb
+├── Graphs/
+│ ├── Market Cap All.png
+│ ├── RnD Groups.png
+│ ├── Role 80 Graph.png
+│ ├── HQ 80 Graph.png
+│ └── HQ no USA 80 Graph.png
+└── README.md
 
 
+- **API Collector finalized.py** — script entry point for the current collector.
+- **API collector fnialized.ipynb** — notebook version mirroring the same logic.
+- **Graphs/** — **example** figures generated from an **older** dataset (details below).
 
+---
 
+## Example Graphs (from `Graphs/`)
 
+> These images were generated using **an older version** of the collector and are shown **as examples** of results.
 
+- **`Market Cap All.png`**  
+  Network of semiconductor firms and inter-firm ties. **Node color/size = market capitalization**.
 
+- **`RnD Groups.png`**  
+  Same network with **node color/size = R&D expenses**.
 
-### This is the original dataset and network mapping of my research project proposal: A network analysis to the semiconductor supply chain governance structure
-- The original data collection process is listed in this jupyter notebook [Network Analysis](https://github.com/Cosmo280/organizational-network-analysis/blob/main/Network%20Analysis/Network%20Analysis.ipynb). It's not well organized so I extracted the raw data and store them in this excel file [raw_data](https://github.com/Cosmo280/organizational-network-analysis/blob/main/Network%20Analysis/raw_data.xlsx) for the convinence of replicate my results. In the excel file, the column "core actors" are the names of all the core organizations; the column "peripheral actors" are the names of all the peripheral organizations; the columns "Ties_Org1" and "Ties_Org2" are the two organizations that formed a tie, make all rows in columns "Ties_Org1" and "Ties_Org2" into ("Ties_Org1", "Ties_Org2") tuples to create a list of all the network ties. Because the ties are non-directional, there is no need to create a list of ("Ties_Org2", "Ties_Org1") tuples. 
-&nbsp;
-- The Latex version of the final paper is [here](https://github.com/Cosmo280/organizational-network-analysis/blob/main/Thesis%20proposal%20components/LitReview.tex); the pdf version is [here](); the citations are [here](https://github.com/Cosmo280/organizational-network-analysis/blob/main/Thesis%20proposal%20components/LitReview.tex).
-* ### Link to presentation slides: https://docs.google.com/presentation/d/1bnDo80cQu7bRS-YaNlS6LAqo-4ZAsahPlmnQUqEHorw/edit#slide=id.g2d28a14a21f_0_1226
-&nbsp;
-- My project argues that transaction cost theory offers no middle ground between internalizing and outsourcing when analyzing firm boundaries. Thus embeddedness should be operationalize with structural cohesion and the depiction of the inter-firm organizational governance structure would require network analysis with organizations as unit of analysis and interlocking dirocrates are strong ties.
-&nbsp; 
-- [Requirements with versions](https://github.com/Cosmo280/30200/blob/main/requirements.txt): 
-* Python -- 3.11.5
-* Numpy -- 1.24.3
-* Pandas -- 1.5.3
-* Matplotlib -- 3.7.1
-* Networkx -- 3.1
-&nbsp;
-- Citation: Wang, C.(2024), organizational network analysis (Version 1.0.0). GitHub. https://github.com/Cosmo280/30200.git
+- **`Role 80 Graph.png`**  
+  Firms colored by **role** (chip users vs. manufacturers). **Clear clustering** by role.
+
+- **`HQ 80 Graph.png`**  
+  Firms colored by **HQ country**. Distinct cluster for **U.S.-headquartered** firms.
+
+- **`HQ no USA 80 Graph.png`**  
+  U.S.-HQ firms removed; clusters for **Taiwan**, **Korea**, and **Japan** become clearer.
+
+You can open these directly in the `Graphs/` folder on GitHub to view them inline.
+
+---
+
+## How the Collector Works (Overview)
+
+1. **Resolve firms → identifiers (RICs)**  
+   Batched discovery to map input firm names to RICs.
+2. **Fetch firm attributes (nodes)**  
+   HQ country, market cap (USD), revenue proxies, etc.
+3. **Fetch supplier–buyer relationships (edges)**  
+   Relationship endpoints + confidence scores; filtered for reliability.
+4. **Reconcile names/IDs**  
+   Human-readable names for analysis and visualization.
+5. **Export & visualize**  
+   CSVs for modeling; PNG graphs for quick structural inspection.
+
+**Entry points**
+- Script: `API Collector finalized.py`  
+- Notebook: `API collector fnialized.ipynb`
+
+---
+
+## Data Provenance & Access
+
+- The **original data collection** and early visuals were associated with a prior project setup.  
+  The process was documented in a Jupyter notebook (titled **“Network Analysis”**) and the raw outputs were extracted to an Excel file called **`raw_data`** purely to **aid replication** of that older workflow:
+  > *“The original data collection process is listed in this Jupyter notebook **Network Analysis**. It wasn’t tightly organized, so I extracted the raw data and stored them in an Excel file **raw_data** for the convenience of replicating my results.”*
+
+- **Important:** The underlying dataset **cannot be distributed** here because it draws on **proprietary business data** (Refinitiv). This repository includes **code** and **example images** only.
+
+- The **new collector** in this repository is **more efficient** and designed for **larger-scale** collection, but rebuilding the dataset requires your **own licensed access** and **credentials**.
+
+---
+
+## Quick Start (minimal)
+
+1. Ensure you have Python and valid access credentials for your data provider (e.g., Refinitiv).
+2. In `API Collector finalized.py` (or the notebook), specify your **seed firm list**.
+3. Run the collector to:
+   - Resolve identifiers
+   - Pull firm attributes and supplier–buyer ties
+   - Export tables (CSV) and generate visuals (PNG)
+
+> Note: This README intentionally skips pinned versions; rely on the imports at the top of the script/notebook to set up your environment.
+
+---
+
+## Research Context
+
+This pipeline supports the argument that **network structure**—beyond firm capacity or national policy—**constrains and sustains** outsourcing decisions in semiconductor supply chains.
+
+- **Thesis (index link):**  
+  *When Structure Takes Over: The Autonomy of Global Supply Chain Networks Beyond Firm Capacity  and Institutional Constraints* — see **Google Scholar**:  
+    [Thesis Link](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C14&q=When+Structure+Takes+Over%3A+The+Autonomy+of+Global+Supply+Chain+Networks+Beyond+Firm+Capacity+and+Institutional+Constraints&btnG=)
+
+---
+
+## Notes & Contact
+
+- Figures in `Graphs/` are **illustrative** from an **older** data snapshot.
+- Rebuilding requires your **licensed** data access and is subject to provider **terms**.
+- Happy to discuss API limits, confidence thresholds for ties, layout choices, or model specs (ERGM/QAP).
+
+---
+
+*© 2025. Code provided for research and evaluation; data access and reuse remain subject to the original provider’s license.*
