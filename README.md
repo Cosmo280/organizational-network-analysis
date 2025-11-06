@@ -10,9 +10,9 @@
 ## Table of Contents
 - [Highlights](#highlights)
 - [Repository Contents](#repository-contents)
-- [Example Graphs (Rendered Inline)](#example-graphs-rendered-inline)
+- [Example Graphs](#example-graphs-rendered-inline)
 - [How the Collector Works (Overview)](#how-the-collector-works-overview)
-- [Data Provenance & Access](#data-provenance--access)
+- [Data Useage & Access](#data-provenance--access)
 - [Quick Start (Minimal)](#quick-start-minimal)
 - [Research Context](#research-context)
 - [Notes & Contact](#notes--contact)
