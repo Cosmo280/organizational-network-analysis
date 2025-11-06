@@ -2,8 +2,8 @@
 
 **End-to-end, API-driven pipeline** that builds a buyer–supplier network for semiconductor firms and produces publication-quality visuals for downstream social network analysis (ERGM, QAP, etc.).
 
-- **What this shows:** How **network structure** helps sustain outsourcing ties even after shocks (e.g., the 2020–2023 chip shortage).
-- **Who this helps:** Researchers, data engineers, and hiring teams evaluating full-lifecycle data work (collection → cleaning → modeling → visualization).
+- **What this shows:** How **network structure** of global supply chains could be collected, organized, and visualized.
+- **Who this helps:** Researchers, data engineers, and anyone interested in supply network analysis.
 
 ---
 
