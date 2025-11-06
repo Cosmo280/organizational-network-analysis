@@ -7,6 +7,18 @@
 
 ---
 
+## Table of Contents
+- [Highlights](#highlights)
+- [Repository Contents](#repository-contents)
+- [Example Graphs (Rendered Inline)](#example-graphs-rendered-inline)
+- [How the Collector Works (Overview)](#how-the-collector-works-overview)
+- [Data Provenance & Access](#data-provenance--access)
+- [Quick Start (Minimal)](#quick-start-minimal)
+- [Research Context](#research-context)
+- [Notes & Contact](#notes--contact)
+
+---
+
 ## Highlights
 
 - **Collector + Graphs:** Python pipeline (Refinitiv) to fetch firm attributes and supplier–buyer edges, reconcile names/IDs, export CSVs, and render graphs.
@@ -15,45 +27,43 @@
 
 ---
 
-## Repository Layout
-.
-├── API Collector finalized.py
-├── API collector fnialized.ipynb
-├── Graphs/
-│ ├── Market Cap All.png
-│ ├── RnD Groups.png
-│ ├── Role 80 Graph.png
-│ ├── HQ 80 Graph.png
-│ └── HQ no USA 80 Graph.png
-└── README.md
+## Repository Contents
 
-
-- **API Collector finalized.py** — script entry point for the current collector.
-- **API collector fnialized.ipynb** — notebook version mirroring the same logic.
-- **Graphs/** — **example** figures generated from an **older** dataset (details below).
+- `API Collector finalized.py` — script entry point for the current collector  
+- `API collector fnialized.ipynb` — notebook version mirroring the same logic  
+- `Graphs/` — **example** figures generated from an **older** dataset (details below):  
+  - `Market Cap All.png`  
+  - `RnD Groups.png`  
+  - `Role 80 Graph.png`  
+  - `HQ 80 Graph.png`  
+  - `HQ no USA 80 Graph.png`
 
 ---
 
-## Example Graphs (from `Graphs/`)
+## Example Graphs (Rendered Inline)
 
-> These images were generated using **an older version** of the collector and are shown **as examples** of results.
+> These images were generated with an **older version** of the collector and are shown here **as examples** of results.  
+> The new collector in this repo is **more efficient** and designed for **larger-scale** datasets.
 
-- **`Market Cap All.png`**  
-  Network of semiconductor firms and inter-firm ties. **Node color/size = market capitalization**.
+### Market Cap – All Firms
+Network of semiconductor firms and inter-firm ties. **Node color/size = market capitalization**.  
+![Market Cap All](Graphs/Market%20Cap%20All.png)
 
-- **`RnD Groups.png`**  
-  Same network with **node color/size = R&D expenses**.
+### R&D Groups
+Same network with **node color/size = R&D expenses**.  
+![RnD Groups](Graphs/RnD%20Groups.png)
 
-- **`Role 80 Graph.png`**  
-  Firms colored by **role** (chip users vs. manufacturers). **Clear clustering** by role.
+### Roles (Chip Users vs. Manufacturers)
+Firms colored by **role**; **clear clustering** by role.  
+![Role 80 Graph](Graphs/Role%2080%20Graph.png)
 
-- **`HQ 80 Graph.png`**  
-  Firms colored by **HQ country**. Distinct cluster for **U.S.-headquartered** firms.
+### Headquarters Countries (with U.S.)
+Firms colored by **HQ country**; distinct **U.S. cluster**.  
+![HQ 80 Graph](Graphs/HQ%2080%20Graph.png)
 
-- **`HQ no USA 80 Graph.png`**  
-  U.S.-HQ firms removed; clusters for **Taiwan**, **Korea**, and **Japan** become clearer.
-
-You can open these directly in the `Graphs/` folder on GitHub to view them inline.
+### Headquarters Countries (U.S. Removed)
+U.S.-HQ firms removed; clusters for **Taiwan**, **Korea**, and **Japan** become clearer.  
+![HQ no USA 80 Graph](Graphs/HQ%20no%20USA%2080%20Graph.png)
 
 ---
 
@@ -70,25 +80,23 @@ You can open these directly in the `Graphs/` folder on GitHub to view them inlin
 5. **Export & visualize**  
    CSVs for modeling; PNG graphs for quick structural inspection.
 
-**Entry points**
-- Script: `API Collector finalized.py`  
-- Notebook: `API collector fnialized.ipynb`
+**Entry points:** `API Collector finalized.py` and `API collector fnialized.ipynb`
 
 ---
 
 ## Data Provenance & Access
 
-- The **original data collection** and early visuals were associated with a prior project setup.  
-  The process was documented in a Jupyter notebook (titled **“Network Analysis”**) and the raw outputs were extracted to an Excel file called **`raw_data`** purely to **aid replication** of that older workflow:
-  > *“The original data collection process is listed in this Jupyter notebook **Network Analysis**. It wasn’t tightly organized, so I extracted the raw data and stored them in an Excel file **raw_data** for the convenience of replicating my results.”*
+- The original figures above come from an older run of the pipeline. For transparency:
 
-- **Important:** The underlying dataset **cannot be distributed** here because it draws on **proprietary business data** (Refinitiv). This repository includes **code** and **example images** only.
+  > *The original data collection process is listed in a Jupyter notebook **Network Analysis**. It wasn’t tightly organized, so I extracted the raw data and stored them in an Excel file **raw_data** for the convenience of replicating my results.*
 
-- The **new collector** in this repository is **more efficient** and designed for **larger-scale** collection, but rebuilding the dataset requires your **own licensed access** and **credentials**.
+- **Important:** The underlying dataset **cannot be distributed** here because it draws on **proprietary business data** (Refinitiv). This repository provides **code** and **example images** only.
+
+- The **new collector** here is **more efficient** and designed for **larger-scale** collection, but rebuilding the dataset requires your **own licensed access** and **credentials**.
 
 ---
 
-## Quick Start (minimal)
+## Quick Start (Minimal)
 
 1. Ensure you have Python and valid access credentials for your data provider (e.g., Refinitiv).
 2. In `API Collector finalized.py` (or the notebook), specify your **seed firm list**.
@@ -97,7 +105,6 @@ You can open these directly in the `Graphs/` folder on GitHub to view them inlin
    - Pull firm attributes and supplier–buyer ties
    - Export tables (CSV) and generate visuals (PNG)
 
-> Note: This README intentionally skips pinned versions; rely on the imports at the top of the script/notebook to set up your environment.
 
 ---
 
@@ -105,9 +112,7 @@ You can open these directly in the `Graphs/` folder on GitHub to view them inlin
 
 This pipeline supports the argument that **network structure**—beyond firm capacity or national policy—**constrains and sustains** outsourcing decisions in semiconductor supply chains.
 
-- **Thesis (index link):**  
-  *When Structure Takes Over: The Autonomy of Global Supply Chain Networks Beyond Firm Capacity  and Institutional Constraints* — see **Google Scholar**:  
-    [Thesis Link](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C14&q=When+Structure+Takes+Over%3A+The+Autonomy+of+Global+Supply+Chain+Networks+Beyond+Firm+Capacity+and+Institutional+Constraints&btnG=)
+- **Thesis:** [Thesis Link](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C14&q=When+Structure+Takes+Over%3A+The+Autonomy+of+Global+Supply+Chain+Networks+Beyond+Firm+Capacity+and+Institutional+Constraints&btnG=)
 
 ---
 
