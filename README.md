@@ -70,7 +70,7 @@ U.S.-HQ firms removed; clusters for **Taiwan**, **Korea**, and **Japan** become 
 ## How the Collector Works (Overview)
 
 1. **Resolve firms → identifiers (RICs)**  
-   Batched discovery to map input firm names to RICs.
+   Run the Refinitiv terminal to locate and map input firm names to RICs.
 2. **Fetch firm attributes (nodes)**  
    HQ country, market cap (USD), revenue proxies, etc.
 3. **Fetch supplier–buyer relationships (edges)**  
@@ -84,7 +84,7 @@ U.S.-HQ firms removed; clusters for **Taiwan**, **Korea**, and **Japan** become 
 
 ---
 
-## Data Provenance & Access
+## Data Useage & Access
 
 - The original figures above come from an older run of the pipeline. For transparency:
 
